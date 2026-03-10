@@ -1,0 +1,103 @@
+.mainWrapper {
+  background-color: #06050d;
+  min-height: 100vh;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+.mainContainer {
+  padding-top: clamp(40px, 8vh, 100px);
+  padding-bottom: 80px;
+}
+
+.contentStack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(60px, 12vh, 120px);
+}
+
+.heroSection {
+  border-radius: 48px;
+  padding: clamp(40px, 6vw, 100px);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.05), transparent),
+              rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+  filter: blur(80px);
+  z-index: 0;
+  animation: pulse 8s infinite alternate;
+}
+
+.heroBadge {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.heroTitle {
+  font-size: clamp(2.8rem, 9vw, 5.5rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -3px;
+}
+
+.heroDescription {
+  max-width: 680px;
+  color: #9ca3af;
+  line-height: 1.7;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 20px -10px rgba(124, 58, 237, 0.5);
+}
+
+.primaryBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -10px rgba(124, 58, 237, 0.6);
+}
+
+.secondaryBtn {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  transition: background 0.2s ease;
+}
+
+.secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(1.1); opacity: 1; }
+}

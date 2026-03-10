@@ -1,0 +1,78 @@
+.subtitle {
+  color: var(--mantine-color-violet-3);
+  font-weight: 700;
+  display: block;
+  text-align: center;
+}
+
+.title {
+  color: #fff;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.description {
+  color: var(--mantine-color-gray-4);
+  font-size: var(--mantine-font-size-sm);
+  text-align: center;
+  margin-bottom: 24px; 
+}
+
+.alert {
+  margin-bottom: var(--mantine-spacing-md);
+  border-radius: var(--mantine-radius-md);
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputField {
+  --input-radius: var(--mantine-radius-md);
+}
+
+.checkboxCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.checkboxControl {
+  --checkbox-color: var(--mantine-color-violet-filled);
+}
+
+.submitBtn {
+  height: 42px;
+  border-radius: var(--mantine-radius-md);
+  background: linear-gradient(135deg, #7c3aed 0%, #14b8a6 100%);
+  border: 0;
+  width: 100%;
+  font-weight: 600;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.link {
+  color: var(--mantine-color-gray-3);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.footerText {
+  color: var(--mantine-color-gray-5);
+  font-size: var(--mantine-font-size-sm);
+}
+
+.registerLink {
+  color: var(--mantine-color-violet-3);
+  text-decoration: none;
+  font-weight: 500;
+}

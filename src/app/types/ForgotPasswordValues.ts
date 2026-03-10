@@ -1,0 +1,3 @@
+type ForgotPasswordValues = {
+  email: string;
+};

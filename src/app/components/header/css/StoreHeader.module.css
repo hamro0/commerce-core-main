@@ -1,0 +1,18 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(18px);
+  background: rgba(10, 8, 20, 0.45);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logoIcon {
+  background: linear-gradient(135deg, rgba(255, 80, 120, 0.25), rgba(140, 82, 255, 0.25));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.exploreBtn {
+  background: linear-gradient(135deg, #7c3aed 0%, #14b8a6 100%);
+  border: 0;
+}

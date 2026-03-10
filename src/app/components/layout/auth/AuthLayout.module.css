@@ -1,0 +1,21 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(circle at top, rgba(80, 40, 160, 0.45), transparent 30%), 
+              radial-gradient(circle at 50% 0%, rgba(0, 255, 180, 0.12), transparent 20%), 
+              linear-gradient(180deg, #090714 0%, #06050d 45%, #04030a 100%);
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px);
+  width: 100%;
+  max-width: 460px;
+  border-radius: var(--mantine-radius-xl);
+  padding: var(--mantine-spacing-xl);
+}

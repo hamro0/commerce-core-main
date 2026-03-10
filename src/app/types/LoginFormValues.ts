@@ -1,0 +1,4 @@
+type LoginFormValues = {
+  email: '';
+  password: '';
+};

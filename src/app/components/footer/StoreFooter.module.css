@@ -1,0 +1,70 @@
+.footerWrapper {
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 80px;
+  padding-bottom: 40px;
+  margin-top: 100px;
+}
+
+.footerGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.brandColumn {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.linksColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 150px;
+}
+
+.columnTitle {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.footerLink {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.footerLink:hover {
+  color: #a78bfa; /* violet-3 */
+  transform: translateX(5px);
+}
+
+.bottomBar {
+  margin-top: 80px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.copyright {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.socialGroup {
+  display: flex;
+  gap: 15px;
+}
