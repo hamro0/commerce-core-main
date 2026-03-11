@@ -18,7 +18,6 @@ export default function NotFound() {
           }}>
             <IconGhost size={80} color="var(--mantine-color-violet-4)" stroke={1.5} />
           </Box>
-
           <Box style={{ textAlign: 'center' }}>
             <Title order={1} c="white" size={rem(60)} fw={900} mb="xs">
               404
@@ -30,7 +29,6 @@ export default function NotFound() {
               The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
             </Text>
           </Box>
-
           <Group justify="center" mt="xl">
             <Button 
               component={Link} 

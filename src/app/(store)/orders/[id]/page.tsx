@@ -57,9 +57,7 @@ export default function OrderDetailsPage({ params }: PageProps) {
                                 {order.status}
                             </Badge>
                         </Group>
-
                         <Divider color="rgba(255,255,255,0.08)" />
-
                         <Box style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             <Text fw={700} c="white">Order Items</Text>
                             {order.items?.map((item, index) => (
@@ -69,9 +67,7 @@ export default function OrderDetailsPage({ params }: PageProps) {
                                 </Group>
                             ))}
                         </Box>
-
                         <Divider color="rgba(255,255,255,0.08)" />
-
                         <Box style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             <Group justify="space-between">
                                 <Text fw={700} size="lg" c="white">Total Amount</Text>

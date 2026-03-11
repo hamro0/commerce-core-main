@@ -35,7 +35,6 @@ export default function EditCategoryPage({ params }: { params: Promise<{ id: str
         <Box className={layout.container}>
             <Container size="sm">
                 <Title order={2} c="white" mb="xl">Edit Category</Title>
-                
                 <Card className={layout.card}>
                     <form onSubmit={handleSubmit}>
                         <Stack gap="md">
@@ -46,7 +45,6 @@ export default function EditCategoryPage({ params }: { params: Promise<{ id: str
                                 onChange={(e) => setName(e.target.value)} 
                                 variant="filled" 
                             />
-                            
                             <Group justify="flex-end" mt="xl">
                                 <Button variant="subtle" color="gray" onClick={() => router.back()} disabled={isSaving}>
                                     Cancel

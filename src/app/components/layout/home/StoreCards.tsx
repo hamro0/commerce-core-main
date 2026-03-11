@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { Box, Button, Card, Text, ThemeIcon, Title } from '@mantine/core';
-
 import classes from '@/src/app/components/layout/home/StoreHome.module.css';
 
 export type GlowCardProps = {
@@ -46,7 +45,6 @@ export function GlowCard({ title, description, icon, buttonText, href }: GlowCar
             {description}
           </Text>
         </Box>
-
         <Button component={Link} href={href} variant="outline" color="violet.3" radius="md" fullWidth mt="xl">
           {buttonText}
         </Button>

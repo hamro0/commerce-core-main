@@ -48,7 +48,6 @@ export default function AdminProductsPage() {
                         Add New Product
                     </Button>
                 </Group>
-
                 <Card className={layout.card} p={0} style={{ overflowX: 'auto' }}>
                     <Table verticalSpacing="md" variant="unstyled" c="white">
                         <Table.Thead style={{ background: 'rgba(255,255,255,0.03)' }}>

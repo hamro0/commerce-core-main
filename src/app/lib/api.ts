@@ -4,11 +4,13 @@ async function apiFetch(endpoint: string, options: RequestInit = {}): Promise<an
     const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
     const token = typeof window !== 'undefined' ? localStorage.getItem('user_token') : null;
 
+    const isPublicRoute = ['/login', '/register'].includes(cleanEndpoint);
+
     const response = await fetch(`${BASE_URL}${cleanEndpoint}`, {
         ...options,
         headers: {
             'Content-Type': 'application/json',
-            ...(token && { 'Authorization': `Bearer ${token}` }),
+            ...(!isPublicRoute && token && { 'Authorization': `Bearer ${token}` }),
             ...((options.headers as Record<string, string>) || {}),
         },
     });
@@ -17,13 +19,19 @@ async function apiFetch(endpoint: string, options: RequestInit = {}): Promise<an
         return null;
     }
 
-    if (!response.ok) {
-        let errorMessage = `API Error: ${response.status} ${response.statusText}`;
+   if (!response.ok) {
+        const errorBody = await response.text(); 
+        console.error("Server Rejected with:", errorBody);
+        
+        let errorMessage = `API Error: ${response.status}`;
         try {
-            const errorData = await response.json();
-            errorMessage = errorData.message || errorData.error || errorMessage;
-        } catch (e) { }
-        throw new Error(errorMessage);
+            const errorData = JSON.parse(errorBody);
+            errorMessage = errorData.message || errorData.error || errorBody;
+        } catch (e) { 
+            errorMessage = errorBody;
+        }
+        
+        throw new Error(errorMessage.replace(/"/g, '')); 
     }
 
     if (response.status === 204) {
@@ -46,7 +54,7 @@ export const api = {
         getAll: (options?: RequestInit) => apiFetch('/orders', options),
         getUserOrders: (userId: string, options?: RequestInit) => apiFetch(`/orders?userId=${userId}`, options),
         getById: (id: string, options?: RequestInit) => apiFetch(`/orders/${id}`, options),
-        create: (data: any, options?: RequestInit) => apiFetch('/orders', { ...options, method: 'POST', body: JSON.stringify(data) }),
+        create: (orderData: any, options?: RequestInit) => apiFetch('/orders', { ...options, method: 'POST', body: JSON.stringify(orderData) }),
         updateStatus: (id: string, status: string, options?: RequestInit) => apiFetch(`/orders/${id}/status`, { ...options, method: 'PATCH', body: JSON.stringify({ status }) }),
     },
 
@@ -62,17 +70,16 @@ export const api = {
         login: (credentials: any, options?: RequestInit) => apiFetch('/login', { ...options, method: 'POST', body: JSON.stringify(credentials) }),
         register: (data: any, options?: RequestInit) => apiFetch('/register', { ...options, method: 'POST', body: JSON.stringify(data) }),
         getProfile: (id: string, options?: RequestInit) => apiFetch(`/users/${id}`, options),
-        updateProfile: (data: any, options?: RequestInit) => apiFetch('/users/1', { ...options, method: 'PUT', body: JSON.stringify(data) }),
-        resetPassword: (data: any, options?: RequestInit) => apiFetch('/users/1', { ...options, method: 'PATCH', body: JSON.stringify(data) }),
-
+        updateProfile: (id: string, data: any, options?: RequestInit) => apiFetch(`/users/${id}`, { ...options, method: 'PATCH', body: JSON.stringify(data) }),
+        resetPassword: (id: string, data: any, options?: RequestInit) => apiFetch(`/users/${id}`, { ...options, method: 'PATCH', body: JSON.stringify(data) }),
     },
 
     cart: {
         get: (options?: RequestInit) => apiFetch('/cart', options),
-        sync: (items: any[], options?: RequestInit) => apiFetch('/cart/sync', { ...options, method: 'POST', body: JSON.stringify({ items }) }),
-    },
-
-    admin: {
-        getStats: (options?: RequestInit) => apiFetch('/admin/stats', options),
+        sync: (cartData: any, options?: RequestInit) => apiFetch('/cart', { ...options, method: 'PUT', body: JSON.stringify(cartData) }),
+        add: (product: any, quantity: number = 1, options?: RequestInit) => apiFetch('/cart', { ...options, method: 'POST', body: JSON.stringify({ ...product, productId: product.id, quantity }) }),
+        update: (productId: string, quantity: number, options?: RequestInit) => apiFetch(`/cart/${productId}`, { ...options, method: 'PUT', body: JSON.stringify({ quantity }) }),
+        remove: (productId: string, options?: RequestInit) => apiFetch(`/cart/${productId}`, { ...options, method: 'DELETE' }),
+        clear: (options?: RequestInit) => apiFetch('/cart', { ...options, method: 'DELETE' }),
     }
 };

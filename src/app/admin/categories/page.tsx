@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Box, Container, Title, Table, Button, Group, ActionIcon, Card, Text, Loader, Center } from '@mantine/core';
+import { Box, Container, Title, Table, Button, Group, ActionIcon, Card, Loader, Center } from '@mantine/core';
 import { IconEdit, IconTrash, IconPlus } from '@tabler/icons-react';
 import Link from 'next/link';
 import layout from '@/src/app/components/layout/StoreLayout.module.css';
@@ -42,7 +42,6 @@ export default function AdminCategoriesPage() {
                         Add Category
                     </Button>
                 </Group>
-
                 <Card className={layout.card} p={0} style={{ overflowX: 'auto' }}>
                     <Table verticalSpacing="md" variant="unstyled" c="white">
                         <Table.Thead style={{ background: 'rgba(255,255,255,0.03)' }}>

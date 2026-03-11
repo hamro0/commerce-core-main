@@ -2,97 +2,111 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useForm } from '@mantine/form';
-import { Box, Button, Card, Text, TextInput, Title, Alert } from '@mantine/core';
-import { IconAlertCircle, IconCheck } from '@tabler/icons-react';
+import { Box, Button, Card, Text, TextInput, Title, Alert, Center, Stack, Anchor,Divider } from '@mantine/core';
+import { IconAlertCircle, IconCheck, IconMail, IconArrowLeft } from '@tabler/icons-react';
 import layout from '@/src/app/components/layout/auth/AuthLayout.module.css';
-import classes from '@/src/app/components/forms/auth/AuthForm.module.css';
 import { api } from '@/src/app/lib/api';
 
 export default function ForgotPasswordPage() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [apiError, setApiError] = useState('');
-  const router = useRouter();
-  const form = useForm({
-    initialValues: { email: '' },
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email address'),
-    },
-  });
+    const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [apiError, setApiError] = useState('');
 
-  const handleSubmit = async (values: typeof form.values) => {
-  setLoading(true);
-  setApiError('');
+    const form = useForm({
+        initialValues: { email: '' },
+        validate: {
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email address'),
+        },
+    });
 
-  const data = await api.auth.resetPassword(values);
+    const handleSubmit = async (values: typeof form.values) => {
+        setLoading(true);
+        setApiError('');
+        try {
+            const response = await api.auth.resetPassword('1', values); 
+            if (response) {
+                setSubmitted(true);
+            } else {
+                setApiError('Email not found. Please check and try again.');
+            }
+        } catch (error) {
+            setApiError('Service temporarily unavailable. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  if (!data) {
-    setApiError('Failed to reset password. Please verify your details and try again.');
-    setLoading(false);
-    return;
-  }
+    return (
+        <Box className={layout.container}>
+            <Card className={layout.card} radius="24px" p={40}>
+                {!submitted ? (
+                    <Stack gap="xl">
+                        <Stack gap="xs" ta="center">
+                            <Text fw={600} c="violet.4">Recover Access</Text>
+                            <Title order={1} c="white">Forgot Password?</Title>
+                            <Text c="gray.5" size="sm">
+                                Enter your email address and we'll send you instructions to reset your password.
+                            </Text>
+                        </Stack>
 
-  if (data.accessToken) 
-    localStorage.setItem('user_token', data.accessToken);
-  
-  if (data.user) 
-    localStorage.setItem('user_data', JSON.stringify(data.user));
-  
-  setSubmitted(true);
-  router.push('/auth/login');
-  setLoading(false);
-};
-  return (
-    <Box className={layout.container}>
-      <Card className={layout.card}>
-        {!submitted ? (
-          <>
-            <Text className={classes.subtitle}>Recover access</Text>
-            <Title order={1} className={classes.title}>Forgot Password?</Title>
-            <Text className={classes.description}>
-              Enter your email address and we'll send you a link to reset your password.
-            </Text>
+                        {apiError && (
+                            <Alert icon={<IconAlertCircle size="1rem" />} color="red" radius="md" variant="light">
+                                {apiError}
+                            </Alert>
+                        )}
 
-            {apiError && (
-              <Alert icon={<IconAlertCircle size="1rem" />} color="red" mb="md" radius="md">
-                {apiError}
-              </Alert>
-            )}
-
-            <form className={classes.formWrapper} onSubmit={form.onSubmit(handleSubmit)}>
-              <TextInput
-                label="Email Address"
-                placeholder="you@example.com"
-                required
-                {...form.getInputProps('email')}
-                className={classes.inputField}
-                disabled={loading}
-              />
-
-              <Button type="submit" className={classes.submitBtn} loading={loading}>
-                Send Reset Link
-              </Button>
-            </form>
-          </>
-        ) : (
-          <Box style={{ textAlign: 'center' }}>
-            <IconCheck size={50} color="var(--mantine-color-green-6)" style={{ marginBottom: '1rem' }} />
-            <Title order={2} className={classes.title}>Check your email</Title>
-            <Text className={classes.description}>
-              Instructions have been sent. If you don't see them, check your spam folder.
-            </Text>
-            <Button variant="subtle" className={classes.registerLink} onClick={() => setSubmitted(false)} mt="md">
-              Didn't receive it? Try again
-            </Button>
-          </Box>
-        )}
-
-        <Box className={classes.footer}>
-          <Link href="/auth/login" className={classes.link}> ← Back to login </Link>
+                        <form onSubmit={form.onSubmit(handleSubmit)}>
+                            <Stack gap="md">
+                                <TextInput
+                                    label="Email Address"
+                                    placeholder="you@example.com"
+                                    leftSection={<IconMail size={16} />}
+                                    required
+                                    {...form.getInputProps('email')}
+                                    disabled={loading}
+                                    styles={{ input: { backgroundColor: 'rgba(255,255,255,0.05)', color: 'white' } }}
+                                />
+                                <Button 
+                                    type="submit" 
+                                    size="lg" 
+                                    radius="md" 
+                                    fullWidth 
+                                    variant="gradient"
+                                    gradient={{ from: 'violet.6', to: 'cyan.5' }}
+                                    loading={loading}
+                                >
+                                    Send Reset Link
+                                </Button>
+                            </Stack>
+                        </form>
+                    </Stack>
+                ) : (
+                    <Stack align="center" ta="center" gap="lg" py={20}>
+                        <Box className={layout.avatarGlow} style={{ width: 80, height: 80, opacity: 0.5 }} />
+                        <IconCheck size={60} color="var(--mantine-color-teal-4)" />
+                        <Title order={2} c="white">Check your email</Title>
+                        <Text c="gray.5">
+                            Instructions have been sent to <b>{form.values.email}</b>. If you don't see them, check your spam folder.
+                        </Text>
+                        <Button variant="subtle" color="violet.3" onClick={() => setSubmitted(false)}>
+                            Didn't receive it? Try again
+                        </Button>
+                    </Stack>
+                )}
+                <Divider my="xl" style={{ opacity: 0.1 }} />
+                <Center>
+                    <Anchor 
+                        component={Link} 
+                        href="/auth/login" 
+                        c="gray.5" 
+                        size="sm" 
+                        style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                    >
+                        <IconArrowLeft size={16} /> Back to login
+                    </Anchor>
+                </Center>
+            </Card>
         </Box>
-      </Card>
-    </Box>
-  );
+    );
 }

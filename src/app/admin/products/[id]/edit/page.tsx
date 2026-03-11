@@ -68,7 +68,6 @@ export default function EditProductPage({ params }: EditProductProps) {
                         </Button>
                         <Title order={1} c="white">Edit Product #{id}</Title>
                     </Box>
-
                     <Card className={layout.card}>
                         <form onSubmit={form.onSubmit(handleSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                             <TextInput
@@ -77,21 +76,18 @@ export default function EditProductPage({ params }: EditProductProps) {
                                 required
                                 {...form.getInputProps('name')}
                             />
-
                             <Select
                                 label="Category"
                                 data={['Tech', 'Accessories', 'Software']}
                                 variant="filled"
                                 {...form.getInputProps('category')}
                             />
-
                             <Textarea
                                 label="Product Description"
                                 minRows={5}
                                 variant="filled"
                                 {...form.getInputProps('description')}
                             />
-
                             <SimpleGrid cols={2} spacing="md">
                                 <NumberInput
                                     label="Price ($)"
@@ -105,7 +101,6 @@ export default function EditProductPage({ params }: EditProductProps) {
                                     {...form.getInputProps('stock')}
                                 />
                             </SimpleGrid>
-
                             <Group mt="xl" grow>
                                 <Button
                                     type="submit"

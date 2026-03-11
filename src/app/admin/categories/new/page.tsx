@@ -10,18 +10,15 @@ export default function AddCategoryPage() {
     const router = useRouter();
     const [name, setName] = useState('');
     const [loading, setLoading] = useState(false);
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
         try {
             const categories = await api.categories.getAll();
-            
             const nextId = categories && categories.length > 0 
                 ? (Math.max(...categories.map((c: any) => parseInt(c.id) || 0)) + 1).toString() 
                 : "1";
-
             await api.categories.create({ id: nextId, name });
             router.push('/admin/categories');
         } catch (error) {
@@ -35,7 +32,6 @@ export default function AddCategoryPage() {
         <Box className={layout.container}>
             <Container size="sm">
                 <Title order={2} c="white" mb="xl">Add New Category</Title>
-                
                 <Card className={layout.card}>
                     <form onSubmit={handleSubmit}>
                         <Stack gap="md">
@@ -47,7 +43,6 @@ export default function AddCategoryPage() {
                                 onChange={(e) => setName(e.target.value)} 
                                 variant="filled" 
                             />
-                            
                             <Group justify="flex-end" mt="xl">
                                 <Button variant="subtle" color="gray" onClick={() => router.back()} disabled={loading}>
                                     Cancel

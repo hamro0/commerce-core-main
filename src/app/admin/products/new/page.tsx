@@ -39,7 +39,6 @@ export default function NewProductPage() {
                         </Button>
                         <Title order={1} c="white">Create New Product</Title>
                     </Box>
-
                     <Card className={layout.card}>
                         <form onSubmit={form.onSubmit(handleSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                             <TextInput
@@ -48,21 +47,18 @@ export default function NewProductPage() {
                                 required
                                 {...form.getInputProps('name')}
                             />
-
                             <Select
                                 label="Category"
                                 data={['Tech', 'Accessories', 'Software']}
                                 variant="filled"
                                 {...form.getInputProps('category')}
                             />
-
                             <Textarea
                                 label="Description"
                                 minRows={4}
                                 variant="filled"
                                 {...form.getInputProps('description')}
                             />
-
                             <SimpleGrid cols={2}>
                                 <NumberInput
                                     label="Price"
@@ -77,7 +73,6 @@ export default function NewProductPage() {
                                     {...form.getInputProps('stock')}
                                 />
                             </SimpleGrid>
-
                             <Box style={{ marginTop: '20px' }}>
                                 <Button
                                     type="submit"
