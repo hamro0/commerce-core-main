@@ -9,12 +9,12 @@ import { IconAlertCircle, IconMail, IconLock } from '@tabler/icons-react';
 import layout from '@/src/app/components/layout/auth/AuthLayout.module.css';
 import classes from '@/src/app/components/forms/auth/AuthForm.module.css';
 import { api } from '@/src/app/lib/api';
-
+import bcrypt from 'bcryptjs';
 export default function LoginPage() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState('');
-
+    bcrypt.hash("Admin@123", 10).then(console.log);
     const form = useForm({
         initialValues: { email: '', password: '' },
         validate: {
@@ -27,6 +27,7 @@ export default function LoginPage() {
       console.log("Sending to API:", values); 
         setLoading(true);
         setApiError('');
+          
         try {
             const data = await api.auth.login(values);
             if (data && data.accessToken) {
@@ -39,6 +40,8 @@ export default function LoginPage() {
             }
         } catch (error) {
             setApiError('Login failed. Please check your connection.');
+
+     
         } finally {
             setLoading(false);
         }

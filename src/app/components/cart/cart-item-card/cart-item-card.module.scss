@@ -1,0 +1,27 @@
+.cartCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(130, 80, 223, 0.3);
+  }
+}
+
+.itemImage {
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.itemName {
+  color: white;
+  font-size: var(--mantine-font-size-md);
+}
+
+.quantityControls {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: var(--mantine-radius-md);
+}

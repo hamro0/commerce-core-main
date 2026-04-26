@@ -17,6 +17,8 @@
     "@mantine/hooks": "^8.3.16",
     "@mantine/notifications": "^8.3.16",
     "@tabler/icons-react": "^3.39.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "dayjs": "^1.11.19",
     "js-cookie": "^3.0.5",
     "json-server": "^0.17.4",
@@ -24,7 +26,8 @@
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "recharts": "^3.8.0"
+    "recharts": "^3.8.0",
+    "sass": "^1.98.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

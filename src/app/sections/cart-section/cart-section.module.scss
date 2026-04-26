@@ -1,0 +1,44 @@
+.sectionWrapper {
+  min-height: 80vh;
+  padding: 60px 0;
+  background: transparent;
+}
+
+.container {
+  width: 100%;
+}
+
+.sectionTitle {
+  color: white;
+  margin-bottom: var(--mantine-spacing-xl);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  svg {
+    color: var(--mantine-color-violet-5);
+  }
+}
+
+.emptyState {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--mantine-radius-xl);
+}
+
+.summaryWrapper {
+  padding: var(--mantine-spacing-md) 0;
+}
+
+.glassCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.07);
+  }
+}

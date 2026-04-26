@@ -78,7 +78,7 @@ export const api = {
         get: (options?: RequestInit) => apiFetch('/cart', options),
         sync: (cartData: any, options?: RequestInit) => apiFetch('/cart', { ...options, method: 'PUT', body: JSON.stringify(cartData) }),
         add: (product: any, quantity: number = 1, options?: RequestInit) => apiFetch('/cart', { ...options, method: 'POST', body: JSON.stringify({ ...product, productId: product.id, quantity }) }),
-        update: (productId: string, quantity: number, options?: RequestInit) => apiFetch(`/cart/${productId}`, { ...options, method: 'PUT', body: JSON.stringify({ quantity }) }),
+        update: (productId: string, quantity: number, options?: RequestInit) => apiFetch(`/cart/${productId}`, { ...options, method: 'PATCH', body: JSON.stringify({ quantity }) }),
         remove: (productId: string, options?: RequestInit) => apiFetch(`/cart/${productId}`, { ...options, method: 'DELETE' }),
         clear: (options?: RequestInit) => apiFetch('/cart', { ...options, method: 'DELETE' }),
     }
